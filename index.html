@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Simple Calculator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin-top: 50px;
+    }
+
+    #display {
+      width: 200px;
+      font-size: 24px;
+      padding: 10px;
+      margin-bottom: 10px;
+    }
+
+    .button-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 50px);
+      gap: 10px;
+      justify-content: center;
+    }
+
+    button {
+      padding: 10px;
+      font-size: 18px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Simple Calculator</h1>
+
+  <input type="text" id="display" readonly>
+
+  <div class="button-grid">
+    <button class="btn" value="7">7</button>
+    <button class="btn" value="8">8</button>
+    <button class="btn" value="9">9</button>
+    <button class="btn" value="+">+</button>
+
+    <button class="btn" value="4">4</button>
+    <button class="btn" value="5">5</button>
+    <button class="btn" value="6">6</button>
+    <button class="btn" value="-">-</button>
+
+    <button class="btn" value="1">1</button>
+    <button class="btn" value="2">2</button>
+    <button class="btn" value="3">3</button>
+    <button class="btn" value="*">*</button>
+
+    <button class="btn" value="0">0</button>
+    <button class="btn" value=".">.</button>
+    <button id="equals">=</button>
+    <button class="btn" value="/">/</button>
+
+    <button id="clear" style="grid-column: span 4;">C</button>
+  </div>
+
+  <script>
+    let expression = "";
+
+    const buttons = document.querySelectorAll(".btn");
+
+    buttons.forEach(button => {
+      button.addEventListener("click", () => {
+        expression += button.value;
+        document.getElementById("display").value = expression;
+      });
+    });
+
+    document.getElementById("equals").addEventListener("click", () => {
+      try {
+        expression = eval(expression);
+        document.getElementById("display").value = expression;
+      } catch (error) {
+        document.getElementById("display").value = "Error";
+        expression = "";
+      }
+    });
+
+    document.getElementById("clear").addEventListener("click", () => {
+      expression = "";
+      document.getElementById("display").value = "";
+    });
+  </script>
+
+</body>
+</html>
